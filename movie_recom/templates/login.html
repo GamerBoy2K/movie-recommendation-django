@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-7YDF2HqbLj7+bFgE8uM7muzODmVTMwzZT6jRn6nEtU6GXTl3Bnoe2W8Ks7sN6BcaJ3qTwcP2fmgeY7Ybf1LrdA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      /* Style the body */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+      
+      /* Style the container */
+      .container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        margin: auto;
+        margin-top: 50px;
+      }
+      
+      /* Style the header */
+      h1 {
+        text-align: center;
+        margin-top: 0;
+      }
+      
+      /* Style the form */
+      form {
+        padding: 10px;
+      }
+      
+      /* Style the input fields */
+      input[type=text], input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        border-radius: 4px;
+      }
+      
+      /* Style the submit button */
+      input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+      }
+      
+      /* Style the cancel button */
+      .cancelbtn {
+        background-color: #f44336;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: auto;
+        float: right;
+        font-size: 16px;
+      }
+      
+      /* Style the sign up link */
+      .signup {
+        text-align: center;
+        padding: 10px;
+      }
+      .signup a {
+        color: #4CAF50;
+        font-size: 16px;
+        text-decoration: none;
+      }
+      .signup a:hover {
+        text-decoration: underline;
+      }
+      
+      /* Style the icon */
+      .icon {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .icon i {
+        font-size: 48px;
+        color: #4CAF50;
+      }
+      
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="icon">
+        <i class="fas fa-user-circle"></i>
+      </div>
+      <h1>Login</h1>
+      <form>
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" required>
+  
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" required>
+  
+        <button type="submit" style="padding: 3%;color: #4CAF50;background-color: #dedfe0;border: 0;">Login</button>
+      </form>
+      <div class="signup">
+        Don't have an account? <a href="#">Sign up</a>
+      </div>
+      <div class="signup">
+        Don't remember the Password? <a href="#">Forget Password</a>
+      </div>
+    </div>
+  </body>
+</html>

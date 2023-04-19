@@ -7,4 +7,7 @@ def indexPage(request):
 
 def movieDetails(request):
     return render(request,'movie-details.html')
+
+def login(request):
+    return render(request,'login.html')
 # Create your views here.
