@@ -6,5 +6,6 @@ urlpatterns=[
     path('',views.indexPage),
     path('movieDetails',views.movieDetails),
     path('login',views.login),
+    path('signup',views.signup),
    
 ]
