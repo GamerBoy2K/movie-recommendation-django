@@ -35,7 +35,7 @@
       }
       
       /* Style the input fields */
-      input[type=text], input[type=password], input[type=email], input[type=file] {
+      input[type=text], input[type=password], input[type=email], input[type=file], input[type=date] {
         width: 100%;
         padding: 12px 20px;
         margin: 8px 0;
@@ -115,6 +115,9 @@
 
         <label for="profile-picture"><b>Profile Picture</b></label>
         <input type="file" name="profile-picture" accept="image/*">
+
+        <label for="profile-picture"><b>Date of Birth</b></label>
+        <input type="date" name="userDOB" required>
   
         <button type="submit" style="padding: 3%;color: #4CAF50;background-color: #dedfe0;border: 0;">Sign Up</button>
       </form>
