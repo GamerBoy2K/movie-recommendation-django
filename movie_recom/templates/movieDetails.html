@@ -5,18 +5,18 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Guy 2021</title>
+  <title>Movie Details</title>
 
   <!-- 
     - favicon
   -->
   <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
 
-  {% load static %}
   <!-- 
     - custom css link
   -->
-  <link rel="stylesheet" href="{% static '/css/style.css'%}">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css'%}">
 
   <!-- 
     - google font link
@@ -26,7 +26,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body id="#top">
+<body id="top">
 
   <!-- 
     - #HEADER
@@ -41,28 +41,24 @@
         <img src="{% static '/images/logo.svg'%}" alt="Filmlane logo">
       </a>
 
+      <!---
       <div class="header-actions">
 
         <button class="search-btn">
-          <ion-icon name="search-outline"></ion-icon>
+            <form action="">
+                <input type="text" name="searchBox" id="">
+                
+                <button type="submit"> <ion-icon name="search-outline"></ion-icon> </button>
+            </form>
+          
         </button>
 
-        <div class="lang-wrapper">
-          <label for="language">
-            <ion-icon name="globe-outline"></ion-icon>
-          </label>
-
-          <select name="language" id="language">
-            <option value="en">EN</option>
-            <option value="au">AU</option>
-            <option value="ar">AR</option>
-            <option value="tu">TU</option>
-          </select>
-        </div>
 
         <button class="btn btn-primary">Sign in</button>
 
       </div>
+
+      -->
 
       <button class="menu-open-btn" data-menu-open-btn>
         <ion-icon name="reorder-two"></ion-icon>
@@ -93,15 +89,15 @@
           </li>
 
           <li>
-            <a href="#" class="navbar-link">Tv Show</a>
+            <form action="" style="display: flex;">
+                <input type="text" name="searchBox" id="" style="margin-left:40px;max-width: 70%;">
+                
+                <button type="submit" style="padding: 3%;"> <ion-icon name="search-outline"></ion-icon> </button>
+            </form>
           </li>
 
           <li>
-            <a href="#" class="navbar-link">Web Series</a>
-          </li>
-
-          <li>
-            <a href="#" class="navbar-link">Pricing</a>
+            <a href="./login"><button class="btn btn-primary">Sign in</button></a>
           </li>
 
         </ul>
@@ -149,44 +145,46 @@
 
 
 
+
+
   <main>
     <article>
 
       <!-- 
         - #MOVIE DETAIL
       -->
-
+      {% for i in m %}
       <section class="movie-detail">
         <div class="container">
 
           <figure class="movie-detail-banner">
 
-            <img src="{% static '/images/movie-4.png'%}" alt="Free guy movie poster">
+            <img src="{% static '/images/movie-4.png'%}" alt="{{i.title}} movie poster">
 
-            <button class="play-btn">
+            <!-- <button class="play-btn">
               <ion-icon name="play-circle-outline"></ion-icon>
-            </button>
+            </button> -->
 
           </figure>
 
           <div class="movie-detail-content">
 
-            <p class="detail-subtitle">New Episodes</p>
+            <!-- <p class="detail-subtitle">New Episodes</p> -->
 
             <h1 class="h1 detail-title">
-              Free <strong>Guy</strong>
+                {{i.title}}
             </h1>
 
             <div class="meta-wrapper">
 
-              <div class="badge-wrapper">
+              <!-- <div class="badge-wrapper">
                 <div class="badge badge-fill">PG 13</div>
 
                 <div class="badge badge-outline">HD</div>
-              </div>
+              </div> -->
 
               <div class="ganre-wrapper">
-                <a href="#">Comedy,</a>
+                <a href="#">{{i.genres}}</a>
 
                 <a href="#">Action,</a>
 
@@ -213,13 +211,13 @@
 
             </div>
 
-            <p class="storyline">
+            <!-- <p class="storyline">
               A bank teller called Guy realizes he is a background character in an open world video game called Free
               City that will
               soon go offline.
-            </p>
+            </p> -->
 
-            <div class="details-actions">
+            <!-- <div class="details-actions">
 
               <button class="share">
                 <ion-icon name="share-social"></ion-icon>
@@ -239,13 +237,13 @@
                 <span>Watch Now</span>
               </button>
 
-            </div>
+            </div> -->
 
-            <a href="{% static '/images/movie-4.png'%}" download class="download-btn">
+            <!-- <a href="{% static '/images/movie-4.png'%}" download class="download-btn">
               <span>Download</span>
 
               <ion-icon name="download-outline"></ion-icon>
-            </a>
+            </a> -->
 
           </div>
 
@@ -253,7 +251,7 @@
       </section>
 
 
-
+      {% endfor %}
 
 
       <!-- 
@@ -263,9 +261,9 @@
       <section class="tv-series">
         <div class="container">
 
-          <p class="section-subtitle">Best TV Series</p>
+          <p class="section-subtitle">Content Based</p>
 
-          <h2 class="h2 section-title">World Best TV Series</h2>
+          <h2 class="h2 section-title">Recommendation</h2>
 
           <ul class="movies-list">
 
@@ -450,7 +448,7 @@
               <a href="#" class="footer-link">Movie</a>
             </li>
 
-            <li>
+<!--             <li>
               <a href="#" class="footer-link">TV Show</a>
             </li>
 
@@ -460,7 +458,7 @@
 
             <li>
               <a href="#" class="footer-link">Pricing</a>
-            </li>
+            </li> -->
 
           </ul>
 
@@ -506,12 +504,6 @@
 
             <li>
               <a href="#" class="social-link">
-                <ion-icon name="logo-pinterest"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
                 <ion-icon name="logo-linkedin"></ion-icon>
               </a>
             </li>
@@ -527,11 +519,11 @@
       <div class="container">
 
         <p class="copyright">
-          &copy; 2022 <a href="#">codewithsadee</a>. All Rights Reserved
+          &copy; 2023 <a href="#">HITK, MCA</a>. Sounak, Shonali
         </p>
 
-        <img src="{% static '/images/footer-bottom-img.png'%}" alt="Online banking companies logo" class="footer-bottom-img">
-
+        <!-- <img src="{% static '/images/footer-bottom-img.png'%}" alt="Online banking companies logo" class="footer-bottom-img">
+ -->
       </div>
     </div>
 

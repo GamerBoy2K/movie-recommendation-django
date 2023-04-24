@@ -1,0 +1,19 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr><td>Title</td><td>Type</td></tr>
+        {% for i in a %}
+        <tr><td>{{i.title}}</td><td>{{i.genres}}</td> 
+            <td><a href="del/{{i.movieId}}">Delete</a></td>
+            <td><a href="edit/{{i.movieId}}">edit</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

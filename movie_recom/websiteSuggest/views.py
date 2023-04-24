@@ -6,7 +6,7 @@ from django.http import JsonResponse
 def indexPage(request):
     return render(request,'index.html')
 
-def movieDetails(request):
+def movieDe(request):
     return render(request,'movie-details.html')
 
 def login(request):
@@ -14,6 +14,15 @@ def login(request):
 
 def signup(request):
     return render(request,'signup.html')
+
+
+def movieDetails(request,id):
+    m=movies.objects.filter(movieId=id)
+    return render(request,'movieDetails.html',{'m':m})
+
+def detailsMov(request,pno):
+    u=movies.objects.all()[((pno*10)-10):(pno*10)]
+    return render(request,'displayMovies.html',{'a':u})
 
 def search(request):
     try:
@@ -26,25 +35,29 @@ def search(request):
 
 
 #AI contant based
-import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-
-# load the Movielens dataset
-import os
-
-absolute_path = os.getcwd()+'\movies.csv'
-#movies = pd.read_csv('../movies.csv')
-movies = pd.read_csv(absolute_path)
-
-# split the genres column into binary columns
-genres = movies['genres'].str.get_dummies('|')
-
-# merge the binary genre columns with the original dataframe
-movies = pd.concat([movies, genres], axis=1)
 
 # define a function to extract features from the movie titles and genres
 def extract_features(df):
+    import pandas as pd
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.metrics.pairwise import cosine_similarity
+
+    # load the Movielens dataset
+    import os
+
+    absolute_path = os.getcwd()+'\movies.csv'
+    #movies = pd.read_csv('../movies.csv')
+    movies = pd.read_csv(absolute_path)
+
+    # split the genres column into binary columns
+    genres = movies['genres'].str.get_dummies('|')
+
+    # merge the binary genre columns with the original dataframe
+    movies = pd.concat([movies, genres], axis=1)
+
+    #__________________________________________________________
+    #inside function to handel the error
+    #__________________________________________________________
     tfidf_vectorizer = TfidfVectorizer(stop_words='english')
     tfidf_matrix = tfidf_vectorizer.fit_transform(df['title'] + ' ' + df[genres.columns].astype(str).apply(lambda x: ' '.join(x), axis=1))
     return tfidf_matrix
@@ -79,3 +92,4 @@ def recommend_movies(movie_id, n=10):
 def movie_recommendations(movie_id):
     recommendations = recommend_movies(int(movie_id))
     return recommendations
+''''''
