@@ -8,7 +8,6 @@ urlpatterns=[
     path('signup',views.signup),
     path('search',views.search),
     path('movieDetails/<int:id>',views.movieDetails),
-    path('movieDe',views.movieDe),
-    path('movie/<int:pno>',views.detailsMov),
+    path('movies/<int:pno>',views.allMovies),
    
 ]

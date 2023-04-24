@@ -6,9 +6,6 @@ from django.http import JsonResponse
 def indexPage(request):
     return render(request,'index.html')
 
-def movieDe(request):
-    return render(request,'movie-details.html')
-
 def login(request):
     return render(request,'login.html')
 
@@ -20,7 +17,7 @@ def movieDetails(request,id):
     m=movies.objects.filter(movieId=id)
     return render(request,'movieDetails.html',{'m':m})
 
-def detailsMov(request,pno):
+def allMovies(request,pno):
     u=movies.objects.all()[((pno*10)-10):(pno*10)]
     return render(request,'displayMovies.html',{'a':u})
 
