@@ -7,5 +7,6 @@ urlpatterns=[
     path('movieDetails',views.movieDetails),
     path('login',views.login),
     path('signup',views.signup),
+    path('search',views.search),
    
 ]
