@@ -10,5 +10,14 @@
         <input type="number" name="movieID" id="">
         <input type="submit" value="Suggest">
     </form>
+
+    <table>
+        <tr><td>Movie ID</td></tr>
+        {% for i in a %}
+        <tr><td>{{i}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
 </body>
 </html>

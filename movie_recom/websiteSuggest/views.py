@@ -87,7 +87,8 @@ def search(request):
 
 
         dummy=movie_recommendations(movieId)
-        return HttpResponse(dummy)
+        #return HttpResponse(dummy)
+        return render(request,'search.html',{'a':dummy})
     except:
         return render(request,'search.html')
 # Create your views here.
