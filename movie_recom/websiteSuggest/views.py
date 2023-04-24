@@ -13,12 +13,15 @@ def signup(request):
     return render(request,'signup.html')
 
 
+#this page for contant recommendation and selected movie details
 def movieDetails(request,id):
     m=movies.objects.filter(movieId=id)
     return render(request,'movieDetails.html',{'m':m})
 
+#this lists all the movies in the database with max of 10 limit per page
 def allMovies(request,pno):
-    u=movies.objects.all()[((pno*10)-10):(pno*10)]
+    maxResult=10
+    u=movies.objects.all()[((pno*maxResult)-maxResult):(pno*maxResult)]
     return render(request,'displayMovies.html',{'a':u})
 
 def search(request):
@@ -35,12 +38,7 @@ def search(request):
 
 # define a function to extract features from the movie titles and genres
 def extract_features(df):
-    import pandas as pd
-    from sklearn.feature_extraction.text import TfidfVectorizer
-    from sklearn.metrics.pairwise import cosine_similarity
 
-    # load the Movielens dataset
-    import os
 
     absolute_path = os.getcwd()+'\movies.csv'
     #movies = pd.read_csv('../movies.csv')
@@ -89,4 +87,3 @@ def recommend_movies(movie_id, n=10):
 def movie_recommendations(movie_id):
     recommendations = recommend_movies(int(movie_id))
     return recommendations
-''''''
