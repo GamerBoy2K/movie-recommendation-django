@@ -1,15 +1,39 @@
+
 # movie-recommendation-django
 
-##how to create virtual env
-1. open the project path
-2. pip install virtalenv
-3. python -m venv env
+A Django based website to recommendate movies to user using content recommendation
 
-##How to activate virtual env
-1. open CMD to the repo path
-2. 'env\Scripts\activate' and hit enter
 
-##Setting up the project
-1. django-admin startproject movie_recom
-2. cd movie_recom
-3. python manage.py startapp websiteSuggest
+## Installation
+
+#### Create virtual env
+- open the project path
+```bash
+  pip install virtalenv
+  python -m venv env
+```
+#### Activate virtual env
+- open CMD on the project path
+```
+env\Scripts\activate
+```
+
+#### Setting up the project
+
+```
+pip install -r requirements.txt
+```
+
+#### Run Locally
+- open the project path
+- Open movie_recom and open CMD
+
+```
+python manage.py runserver
+```
+## Features
+
+- Responsive Website
+- Can Search Movies
+- No of Recommendation can be changed from views
+
