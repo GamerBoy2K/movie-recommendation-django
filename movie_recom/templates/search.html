@@ -12,9 +12,11 @@
     </form>
 
     <table>
-        <tr><td>Movie ID</td></tr>
+        <tr><td>Movie ID</td>
+            <td>Movie Title</td></tr>
         {% for i in a %}
-        <tr><td>{{i}}</td>
+        <tr><td>{{a}}</td>
+            <td>{{i.title}}</td>
         </tr>
         {% endfor %}
     </table>
