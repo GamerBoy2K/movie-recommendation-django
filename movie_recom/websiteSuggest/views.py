@@ -12,6 +12,11 @@ def login(request):
 def signup(request):
     return render(request,'signup.html')
 
+def searchResult(request):
+    searchKey=request.GET['searchBox']
+    searchList=movies.objects.filter(title__icontains=searchKey)
+    return render(request,'searchResult.html',{'ms':searchList, 'key':searchKey})
+
 
 #this page for contant recommendation and selected movie details
 def movieDetails(request,id):

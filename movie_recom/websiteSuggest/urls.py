@@ -6,6 +6,7 @@ urlpatterns=[
     path('',views.indexPage),
     path('login',views.login),
     path('signup',views.signup),
+    path('searchResult',views.searchResult),
     path('search',views.search),
     path('movieDetails/<int:id>',views.movieDetails),
     path('movies/<int:pno>',views.allMovies),
