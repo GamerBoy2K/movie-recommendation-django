@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import *
+from .forms import *
 from django.http import JsonResponse
 
 def indexPage(request):
@@ -35,6 +36,30 @@ def addMov(request):
     
     return redirect(addMovies)
 #this page for contant recommendation and selected movie details
+
+def editMovie(request,id):
+    m=movies.objects.get(movieId=id)
+    return render(request,'editMovie.html',{'x':m})
+
+def editFinalMovie(request):
+    mid=request.POST['movieID']
+    print(mid)
+    m=movies.objects.get(movieId=mid)
+    '''
+    form=mform(request.POST,instance=m)
+    if form.is_valid():
+        print('hi')
+        form.save()
+        return redirect("../view")
+    print('momoo')
+    return render(request,'editMovie.html',{'x':m})
+    '''
+    m.title=request.POST['title']
+    m.genres=request.POST['genre']
+    m.imagePoster=request.FILES['uploadFromPC']
+    m.save()
+    return redirect(indexPage)
+
 def movieDetails(request,id):
     m=movies.objects.filter(movieId=id)
 

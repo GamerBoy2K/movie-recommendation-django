@@ -81,7 +81,7 @@
         <ul class="navbar-list">
 
           <li>
-            <a href="./" class="navbar-link">Home</a>
+            <a href="/" class="navbar-link">Home</a>
           </li>
 
           <li>
@@ -159,7 +159,7 @@
 
           <figure class="movie-detail-banner">
 
-            <img src="{% static '/images/movie-4.png'%}" alt="{{i.title}} movie poster">
+            <img src="/media/{{i.imagePoster}}" alt="{{i.title}} movie poster">
 
             <!-- <button class="play-btn">
               <ion-icon name="play-circle-outline"></ion-icon>
@@ -265,7 +265,7 @@
 
                 <a href="./movieDetails">
                   <figure class="card-banner">
-                    <img src="{% static '/images/series-1.png'%}" alt="Moon Knight movie poster">
+                    <img src="/media/{{j.imagePoster}}" alt="movie poster">
                   </figure>
                 </a>
 
@@ -327,7 +327,7 @@
           <ul class="footer-list">
 
             <li>
-              <a href="./" class="footer-link">Home</a>
+              <a href="/" class="footer-link">Home</a>
             </li>
 
             <li>

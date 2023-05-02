@@ -14,5 +14,7 @@ urlpatterns=[
     path('movies/<int:pno>',views.allMovies),
     path('addMovies',views.addMovies),
     path('addMov',views.addMov),
+    path('edit/<int:id>',views.editMovie),
+    path('editMovFinal',views.editFinalMovie),
    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
