@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import *
 from django.http import JsonResponse
@@ -17,7 +17,23 @@ def searchResult(request):
     searchList=movies.objects.filter(title__icontains=searchKey)
     return render(request,'searchResult.html',{'ms':searchList, 'key':searchKey})
 
+def addMovies(request):
+    return render(request, 'addMovie.html')
 
+def addMov(request):
+    m=movies()
+    ''' 
+    if request.method == 'POST':
+        print('Hollla')
+        print(request.FILES)
+    '''
+    m.title=request.POST['title']
+    m.genres=request.POST['genre']
+    m.imagePoster=request.FILES['uploadFromPC']
+    #print('holaaaaaaaa '+len(request.FILES['uploadFromPC']))
+    m.save()
+    
+    return redirect(addMovies)
 #this page for contant recommendation and selected movie details
 def movieDetails(request,id):
     m=movies.objects.filter(movieId=id)

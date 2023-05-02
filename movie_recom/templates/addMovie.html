@@ -100,20 +100,21 @@
 </head>
 <body>
 	<div class="container">
-		<form action="#">
+		<form action="addMov" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
 			<div class="row">
 				<div class="col-25">
 					<label for="title">Movie Title</label>
 				</div>
 				<div class="col-75">
-					<input type="text" id="title" name="title" placeholder="Enter movie title...">
+					<input type="text" id="title" name="title" placeholder="Enter movie title..." required>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-25">
 					<label for="genres">Movie Genres</label>
 				</div>
-				<div class="col-75">
+				<div class="col-75" style="display: flex;flex-wrap: wrap; align-items: baseline;">
 					<input type="checkbox" id="sci-fi" name="genre" value="sci-fi">
 					<label for="sci-fi">Sci-Fi</label>
 					<input type="checkbox" id="mystery" name="genre" value="mystery">
@@ -157,7 +158,7 @@
                         <label for="image">Movie Image</label>
                     </div>
                     <div class="col-75">
-                        <input type="file" id="image" name="image" accept="image/*">
+                        <input type="file" id="uploadFromPC" name="uploadFromPC" accept="image/*" required>
                     </div>
                 </div>
                 <div class="row">
@@ -176,12 +177,12 @@
               const fileSize = file.size;
               const fileName = file.name;
               const fileExtension = fileName.split('.').pop().toLowerCase();
-
+/*
               const timestamp = Date.now();
               const filename = `${timestamp}_${file.name}`;
               const newFile = new File([file], filename, {type: file.type});
               fileInput.files[0] = newFile;
-        
+*/
               if (!allowedExtensions.includes(fileExtension)) {
                 alert('Please select an image file (jpg, jpeg, png).');
                 fileInput.value = '';
