@@ -103,7 +103,8 @@
         <i class="fas fa-user-circle"></i>
       </div>
       <h1>Login</h1>
-      <form>
+      <form method="POST">
+        {% csrf_token %}
         <label for="username"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="username" required>
   
@@ -112,6 +113,7 @@
   
         <button type="submit" style="padding: 3%;color: #4CAF50;background-color: #dedfe0;border: 0;">Login</button>
       </form>
+
       <div class="signup">
         Don't have an account? <a href="./signup">Sign up</a>
       </div>
