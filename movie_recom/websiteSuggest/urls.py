@@ -21,5 +21,8 @@ urlpatterns=[
     path('adminDashboard',views.adminDashboard), #need Edit
     path('updateUser',views.update_user),##need edit
     path('editDeleteTable',views.editDelete),
+    path('addWatchLater/<int:id>',views.watchLaterAdd),
+    path('watchLater',views.watchLaterHistory),
+    path('removeWatchLater/<int:idx>',views.deleteWatchLater),
    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -80,6 +80,39 @@ def editDelete(request):
     else:
         return render(request,'editDeleteList.html')
 
+def watchLaterHistory(request):
+    if not request.user.is_authenticated:
+        return redirect(login_users)
+    if request.user.is_superuser:
+        return render(request,'403Forbidden.html')
+    currentUser=request.user
+    wlList=watchLater.objects.filter(userId=currentUser)
+    return render(request,'watchLater.html',{'ms':wlList})
+
+def deleteWatchLater(request,idx):
+    if not request.user.is_authenticated:
+        return redirect(login_users)
+    if request.user.is_superuser:
+        return render(request,'403Forbidden.html')
+    wlList=watchLater.objects.get(id=idx)
+    wlList.delete()
+    return redirect(adminDashboard)
+
+def watchLaterAdd(request,id):
+    if not request.user.is_authenticated:
+        return redirect(login_users)
+    if request.user.is_superuser:
+        return render(request,'403Forbidden.html')
+    try:
+        wl=watchLater()
+        wl.userId=request.user
+        wl.movieNum=movies.objects.get(movieId=id)
+        wl.save()
+        return redirect(adminDashboard)
+    except:
+        print('something went wrong')
+        return redirect(indexPage)
+
 def searchResult(request):
     searchKey=request.GET['searchBox']
     searchList=movies.objects.filter(title__icontains=searchKey)

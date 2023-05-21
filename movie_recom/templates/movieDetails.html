@@ -95,9 +95,15 @@
               <ion-icon name="download-outline"></ion-icon>
             </a>  
 
+            {% else %}
+            <a href="../addWatchLater/{{i.movieId}}" class="download-btn">
+              <span>Watch Later</span>
+
+              <ion-icon name="download-outline"></ion-icon>
+            </a> 
+
             {% endif %}
             
-
           </div>
 
         </div>
