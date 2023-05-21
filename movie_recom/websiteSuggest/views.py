@@ -50,10 +50,12 @@ def update_user(request):
         form=RegisterUserForm(request.POST or None, instance=current_user)
         if form.is_valid():
             form.save()
+            messages.success(request,"You updated")
+            return redirect(login_users)
         return render(request, 'updateUser.html',{'form':form})
     else:
         messages.success(request,"You must be logged in to update")
-        return redirect(login)
+        return redirect(login_users)
     
     
 
