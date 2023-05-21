@@ -19,5 +19,6 @@ urlpatterns=[
     path('editMovFinal',views.editFinalMovie), ##part 2 edit
     path('invalidCredentials',views.invalidCredentials), #debug
     path('adminDashboard',views.adminDashboard), #need Edit
+    path('updateUser',views.update_user),
    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

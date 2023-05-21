@@ -12,16 +12,16 @@ def indexPage(request):
 
 def register_user(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = RegisterUserForm(request.POST)
         if form.is_valid():
             form.save()
             username= form.cleaned_data['username']
             password= form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
             login(request,user)
-            redirect(adminDashboard)
+            return redirect(adminDashboard)
     else:
-        form = UserCreationForm()
+        form = RegisterUserForm()
     return render(request,'signup.html', {'form':form})
 
 def login_users(request):
@@ -35,11 +35,27 @@ def login_users(request):
         else:
             messages.success(request,"Invalid Details")
             return redirect(invalidCredentials)
-    return render(request,'login.html')
+    else:
+        return render(request,'login.html')
 
 def logout_users(request):
     logout(request)
     return redirect(invalidCredentials)
+
+def update_user(request):
+    #return render(request, 'updateUser.html',{})
+    
+    if request.user.is_authenticated:
+        current_user=User.objects.get(id=request.user.id)
+        form=RegisterUserForm(request.POST or None, instance=current_user)
+        if form.is_valid():
+            form.save()
+        return render(request, 'updateUser.html',{'form':form})
+    else:
+        messages.success(request,"You must be logged in to update")
+        return redirect(login)
+    
+    
 
 def adminDashboard(request):
     return render(request,'adminHome.html')
