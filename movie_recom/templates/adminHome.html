@@ -17,50 +17,157 @@
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">Admit Dashboard</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="logout">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
 
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-md-6 col-lg-3">
-        <div class="box-button">
-          <h5>Add Movies</h5>
+    {% if user.is_authenticated %}
+
+        {% if user.is_superuser %}
+
+            <h1>Hi super user HITK23Django</h1>  
+
+        {% endif %}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+            <a class="navbar-brand" href="#">Admit Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout">Logout</a>
+                </li>
+                </ul>
+            </div>
+            </div>
+        </nav>
+
+        <div class="container mt-5">
+            <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="box-button">
+                <h5>Add Movies</h5>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="box-button">
+                <h5>Edit Movies</h5>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="box-button">
+                <h5>All Movies</h5>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="box-button">
+                <h5>Delete Movies</h5>
+                </div>
+            </div>
+            </div>
         </div>
-      </div>
-      <div class="col-md-6 col-lg-3">
-        <div class="box-button">
-          <h5>Edit Movies</h5>
+
+        {% else %}
+        
+        <style>
+            html { box-sizing: border-box; }
+        
+        *,
+        *::before,
+        *::after { box-sizing: inherit; }
+        
+        body * {
+          margin: 0;
+          padding: 0;
+        }
+        
+        body {
+          font: normal 100%/1.15 "Merriweather", serif;
+          background: #fff url("https://www.dropbox.com/s/0czxq7wr862we98/texture.jpg?raw=1") repeat 0 0;
+          color: #fff;
+        }
+        
+        /* https://www.vecteezy.com/vector-art/87721-wood-fence-vectors */
+        .wrapper {
+          position: relative;
+          max-width: 1298px;
+          height: auto;
+          margin: 2em auto 0 auto;
+          background: transparent url("https://www.dropbox.com/s/qq5n8w99q40wtrg/wood-fence.png?raw=1") no-repeat center top 24em;
+        }
+        
+        /* https://www.vecteezy.com/vector-art/237238-dog-family-colored-doodle-drawing */
+        .box {
+          max-width: 70%;
+          min-height: 600px;
+          margin: 0 auto;
+          padding: 1em 1em;
+          text-align: center;
+          background: transparent url("https://www.dropbox.com/s/ft9vhk6720t1k86/dog-family-colored-doodle-drawing.jpg?raw=1") no-repeat top 10em center;
+        }
+        
+        h1 {
+          margin: 0 0 1rem 0;
+          font-size: 8em;
+          text-shadow: 0 0 6px #8b4d1a;
+        }
+        
+        p {
+          margin-bottom: 0.5em;
+          font-size: 1.75em;
+          color: #ea8a1a;
+        }
+        
+        p:first-of-type {
+          margin-top: 16em;
+          text-shadow: none;
+        }
+        
+        p > a {
+          border-bottom: 1px dashed #837256;
+          font-style: italic;
+          text-decoration: none;
+          color: #837256;
+        }
+        
+        p > a:hover { text-shadow: 0 0 3px #8b4d1a; }
+        
+        p img { vertical-align: bottom; }
+        
+        @media screen and (max-width: 600px) {
+          .wrapper {
+            background-size: 300px 114px;
+            background-position: center top 22em;
+            }
+        
+          .box {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+            background-size: 320px 185px;
+          }
+        
+          p:first-of-type { margin-top: 12em; }
+        }
+        </style>
+        
+        
+        <div class="wrapper">
+            <div class="box">
+            <h1>403</h1>
+            <p>Sorry, it's not allowed to go beyond this point!</p>
+            <p><a href="login">Please, go back and Login.</a></p>
+            </div>
         </div>
-      </div>
-      <div class="col-md-6 col-lg-3">
-        <div class="box-button">
-          <h5>All Movies</h5>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-3">
-        <div class="box-button">
-          <h5>Delete Movies</h5>
-        </div>
-      </div>
-    </div>
-  </div>
+        
+        
+
+        {% endif %}
+
+        
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

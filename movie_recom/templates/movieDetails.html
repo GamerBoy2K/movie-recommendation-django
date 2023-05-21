@@ -231,11 +231,16 @@
 
             </div> -->
 
-            <!-- <a href="{% static '/images/movie-4.png'%}" download class="download-btn">
-              <span>Download</span>
+            {% if user.is_superuser %}
+
+            <a href="../edit/{{i.movieId}}" class="download-btn">
+              <span>Edit</span>
 
               <ion-icon name="download-outline"></ion-icon>
-            </a> -->
+            </a>  
+
+            {% endif %}
+            
 
           </div>
 
