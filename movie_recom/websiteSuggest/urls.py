@@ -24,5 +24,6 @@ urlpatterns=[
     path('addWatchLater/<int:id>',views.watchLaterAdd),
     path('watchLater',views.watchLaterHistory),
     path('removeWatchLater/<int:idx>',views.deleteWatchLater),
+    path('delete/<int:id>',views.deleteMovies),
    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

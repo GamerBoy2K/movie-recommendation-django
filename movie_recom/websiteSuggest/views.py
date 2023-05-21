@@ -118,6 +118,15 @@ def searchResult(request):
     searchList=movies.objects.filter(title__icontains=searchKey)
     return render(request,'searchResult.html',{'ms':searchList, 'key':searchKey})
 
+def deleteMovies(request,id):
+    if not request.user.is_authenticated:
+        return redirect(login_users)
+    if not request.user.is_superuser:
+        return render(request,'403Forbidden.html')
+    movieDel=movies.objects.get(movieId=id)
+    movieDel.delete()
+    return redirect(adminDashboard)
+
 def addMovies(request):
     return render(request, 'addMovie.html')
 
