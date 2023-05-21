@@ -68,6 +68,18 @@ def invalidCredentials(request):
 def signup(request):
     return render(request,'signup.html')
 
+def editDelete(request):
+    if not request.user.is_superuser:
+        return render(request,'403Forbidden.html')
+    if request.method == "GET":
+        searchKey=request.GET['searchBox']
+        searchList=movies.objects.filter(title__icontains=searchKey)
+        print(searchKey)
+        print(searchList)
+        return render(request,'editDeleteList.html',{'ms':searchList, 'key':searchKey})
+    else:
+        return render(request,'editDeleteList.html')
+
 def searchResult(request):
     searchKey=request.GET['searchBox']
     searchList=movies.objects.filter(title__icontains=searchKey)
