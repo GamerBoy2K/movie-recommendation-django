@@ -5,9 +5,24 @@ from .forms import *
 from django.http import JsonResponse
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 
 def indexPage(request):
     return render(request,'index.html')
+
+def register_user(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username= form.cleaned_data['username']
+            password= form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            login(request,user)
+            redirect(adminDashboard)
+    else:
+        form = UserCreationForm()
+    return render(request,'signup.html', {'form':form})
 
 def login_users(request):
     if request.method == "POST":

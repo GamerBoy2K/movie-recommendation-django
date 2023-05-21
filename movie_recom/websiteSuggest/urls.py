@@ -8,7 +8,7 @@ urlpatterns=[
     path('',views.indexPage),
     path('login',views.login_users),
     path('logout',views.logout_users),
-    path('signup',views.signup),
+    path('signup',views.register_user),
     path('searchResult',views.searchResult),
     path('search',views.search),
     path('movieDetails/<int:id>',views.movieDetails),
