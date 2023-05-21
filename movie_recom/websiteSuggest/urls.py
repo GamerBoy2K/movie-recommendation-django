@@ -6,7 +6,8 @@ from django.conf.urls.static import static
 
 urlpatterns=[
     path('',views.indexPage),
-    path('login',views.login),
+    path('login',views.login_users),
+    path('logout',views.logout_users),
     path('signup',views.signup),
     path('searchResult',views.searchResult),
     path('search',views.search),
@@ -16,5 +17,7 @@ urlpatterns=[
     path('addMov',views.addMov),
     path('edit/<int:id>',views.editMovie),
     path('editMovFinal',views.editFinalMovie),
+    path('invalidCredentials',views.invalidCredentials),
+    path('adminDashboard',views.adminDashboard),
    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

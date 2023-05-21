@@ -3,12 +3,34 @@ from django.http import HttpResponse
 from .models import *
 from .forms import *
 from django.http import JsonResponse
+from django.contrib.auth import authenticate,login,logout
+from django.contrib import messages
 
 def indexPage(request):
     return render(request,'index.html')
 
-def login(request):
+def login_users(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect(adminDashboard)
+        else:
+            messages.success(request,"Invalid Details")
+            return redirect(invalidCredentials)
     return render(request,'login.html')
+
+def logout_users(request):
+    logout(request)
+    return redirect(invalidCredentials)
+
+def adminDashboard(request):
+    return render(request,'adminHome.html')
+
+def invalidCredentials(request):
+    return render(request,'invalidCredentials.html')
 
 def signup(request):
     return render(request,'signup.html')
