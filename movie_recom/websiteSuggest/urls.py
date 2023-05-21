@@ -1,5 +1,7 @@
 from django.urls import path,include
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns=[
@@ -10,5 +12,9 @@ urlpatterns=[
     path('search',views.search),
     path('movieDetails/<int:id>',views.movieDetails),
     path('movies/<int:pno>',views.allMovies),
+    path('addMovies',views.addMovies),
+    path('addMov',views.addMov),
+    path('edit/<int:id>',views.editMovie),
+    path('editMovFinal',views.editFinalMovie),
    
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

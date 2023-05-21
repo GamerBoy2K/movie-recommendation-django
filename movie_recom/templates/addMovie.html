@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+		
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f2f2f2;
+		}
+		
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #fff;
+		}
+		
+		.row {
+			display: flex;
+			flex-wrap: wrap;
+			margin: 10px 0;
+		}
+		
+		.col-25 {
+			flex: 25%;
+			padding: 0 10px;
+			box-sizing: border-box;
+		}
+		
+		.col-50 {
+			flex: 50%;
+			padding: 0 10px;
+			box-sizing: border-box;
+		}
+		
+		.col-75 {
+			flex: 75%;
+			padding: 0 10px;
+			box-sizing: border-box;
+		}
+		
+		.col-25,
+		.col-50,
+		.col-75 {
+			margin-bottom: 20px;
+		}
+		
+		input[type=text], select {
+			width: 100%;
+			padding: 12px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			resize: vertical;
+		}
+		
+		label {
+			font-weight: bold;
+			display: block;
+			margin-bottom: 5px;
+		}
+		
+		input[type=submit] {
+			background-color: #4CAF50;
+			color: white;
+			padding: 12px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			float: right;
+		}
+		
+		input[type=submit]:hover {
+			background-color: #45a049;
+		}
+		
+		.container::after {
+			content: "";
+			clear: both;
+			display: table;
+		}
+		
+		@media screen and (max-width: 600px) {
+			.col-25, .col-50, .col-75 {
+				flex: 100%;
+			}
+			input[type=submit] {
+				float: none;
+				display: block;
+				margin: auto;
+			}
+		}
+		
+	</style>
+</head>
+<body>
+	<div class="container">
+		<form action="addMov" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+			<div class="row">
+				<div class="col-25">
+					<label for="title">Movie Title</label>
+				</div>
+				<div class="col-75">
+					<input type="text" id="title" name="title" placeholder="Enter movie title..." required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-25">
+					<label for="genres">Movie Genres</label>
+				</div>
+				<div class="col-75" style="display: flex;flex-wrap: wrap; align-items: baseline;">
+					<input type="checkbox" id="sci-fi" name="genre" value="sci-fi">
+					<label for="sci-fi">Sci-Fi</label>
+					<input type="checkbox" id="mystery" name="genre" value="mystery">
+					<label for="mystery">Mystery</label>
+                    <input type="checkbox" id="romance" name="genre" value="romance">
+                    <label for="romance">Romance</label>
+                    <input type="checkbox" id="thriller" name="genre" value="thriller">
+                    <label for="thriller">Thriller</label>
+                    <input type="checkbox" id="drama" name="genre" value="drama">
+                    <label for="drama">Drama</label>
+                    <input type="checkbox" id="animation" name="genre" value="animation">
+                    <label for="animation">Animation</label>
+                    <input type="checkbox" id="fantasy" name="genre" value="fantasy">
+                    <label for="fantasy">Fantasy</label>
+                    <input type="checkbox" id="war" name="genre" value="war">
+                    <label for="war">War</label>
+                    <input type="checkbox" id="musical" name="genre" value="musical">
+                    <label for="musical">Musical</label>
+                    <input type="checkbox" id="crime" name="genre" value="crime">
+                    <label for="crime">Crime</label>
+                    <input type="checkbox" id="children" name="genre" value="children">
+                    <label for="children">Children</label>
+                    <input type="checkbox" id="adventure" name="genre" value="adventure">
+                    <label for="adventure">Adventure</label>
+                    <input type="checkbox" id="horror" name="genre" value="horror">
+                    <label for="horror">Horror</label>
+                    <input type="checkbox" id="action" name="genre" value="action">
+                    <label for="action">Action</label>
+                    <input type="checkbox" id="documentary" name="genre" value="documentary">
+                    <label for="documentary">Documentary</label>
+                    <input type="checkbox" id="comedy" name="genre" value="comedy">
+                    <label for="comedy">Comedy</label>
+                    <input type="checkbox" id="imax" name="genre" value="imax">
+                    <label for="imax">IMAX</label>
+                    <input type="checkbox" id="western" name="genre" value="western">
+                    <label for="western">Western</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-25">
+                        <label for="image">Movie Image</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="file" id="uploadFromPC" name="uploadFromPC" accept="image/*" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+
+        <script>
+            const fileInput = document.querySelector('input[type="file"]');
+            const fileSizeLimit = 500 * 1024; // 500KB in bytes
+            const allowedExtensions = ['jpg', 'jpeg', 'png'];
+        
+            fileInput.addEventListener('change', function(event) {
+              const file = event.target.files[0];
+              const fileSize = file.size;
+              const fileName = file.name;
+              const fileExtension = fileName.split('.').pop().toLowerCase();
+/*
+              const timestamp = Date.now();
+              const filename = `${timestamp}_${file.name}`;
+              const newFile = new File([file], filename, {type: file.type});
+              fileInput.files[0] = newFile;
+*/
+              if (!allowedExtensions.includes(fileExtension)) {
+                alert('Please select an image file (jpg, jpeg, png).');
+                fileInput.value = '';
+                return;
+              }
+        
+              if (fileSize > fileSizeLimit) {
+                alert('File size must be under 500KB.');
+                fileInput.value = '';
+                return;
+              }
+            });
+          </script>
+
+    </body>
+</html>
