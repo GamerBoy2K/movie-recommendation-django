@@ -19,6 +19,7 @@ urlpatterns=[
     path('editMovFinal',views.editFinalMovie), ##part 2 edit
     path('invalidCredentials',views.invalidCredentials), #debug
     path('adminDashboard',views.adminDashboard), #need Edit
+    path('userDashboard',views.userDashboard),
     path('updateUser',views.update_user),##need edit
     path('editDeleteTable',views.editDelete),
     path('addWatchLater/<int:id>',views.watchLaterAdd),

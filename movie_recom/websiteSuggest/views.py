@@ -19,7 +19,7 @@ def register_user(request):
             password= form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
             login(request,user)
-            return redirect(adminDashboard)
+            return redirect(userDashboard)
     else:
         form = RegisterUserForm()
     return render(request,'signup.html', {'form':form})
@@ -31,7 +31,10 @@ def login_users(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect(adminDashboard)
+            if user.is_superuser:
+                return redirect(adminDashboard)
+            else:
+                return redirect(userDashboard)
         else:
             messages.success(request,"Invalid Details")
             return redirect(invalidCredentials)
@@ -40,7 +43,7 @@ def login_users(request):
 
 def logout_users(request):
     logout(request)
-    return redirect(invalidCredentials)
+    return redirect(indexPage)
 
 def update_user(request):
     #return render(request, 'updateUser.html',{})
@@ -60,7 +63,17 @@ def update_user(request):
     
 
 def adminDashboard(request):
+    if not request.user.is_superuser:
+        return render(request,'403Forbidden.html')
     return render(request,'adminHome.html')
+
+def userDashboard(request):
+    if request.user.is_authenticated:
+        if request.user.is_superuser:
+            return render(request,'403Forbidden.html')
+        else:
+            return render(request,'userHome.html')
+    return redirect(login_users)
 
 def invalidCredentials(request):
     return render(request,'invalidCredentials.html')
@@ -96,7 +109,7 @@ def deleteWatchLater(request,idx):
         return render(request,'403Forbidden.html')
     wlList=watchLater.objects.get(id=idx)
     wlList.delete()
-    return redirect(adminDashboard)
+    return redirect(userDashboard)
 
 def watchLaterAdd(request,id):
     if not request.user.is_authenticated:
@@ -108,7 +121,7 @@ def watchLaterAdd(request,id):
         wl.userId=request.user
         wl.movieNum=movies.objects.get(movieId=id)
         wl.save()
-        return redirect(adminDashboard)
+        return redirect(userDashboard)
     except:
         print('something went wrong')
         return redirect(indexPage)
