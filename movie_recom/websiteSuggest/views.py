@@ -3,20 +3,142 @@ from django.http import HttpResponse
 from .models import *
 from .forms import *
 from django.http import JsonResponse
+from django.contrib.auth import authenticate,login,logout
+from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm
 
 def indexPage(request):
     return render(request,'index.html')
 
-def login(request):
-    return render(request,'login.html')
+def register_user(request):
+    if request.method == "POST":
+        form = RegisterUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username= form.cleaned_data['username']
+            password= form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            login(request,user)
+            return redirect(userDashboard)
+    else:
+        form = RegisterUserForm()
+    return render(request,'signup.html', {'form':form})
+
+def login_users(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            if user.is_superuser:
+                return redirect(adminDashboard)
+            else:
+                return redirect(userDashboard)
+        else:
+            messages.success(request,"Invalid Details")
+            return redirect(invalidCredentials)
+    else:
+        return render(request,'login.html')
+
+def logout_users(request):
+    logout(request)
+    return redirect(indexPage)
+
+def update_user(request):
+    #return render(request, 'updateUser.html',{})
+    
+    if request.user.is_authenticated:
+        current_user=User.objects.get(id=request.user.id)
+        form=RegisterUserForm(request.POST or None, instance=current_user)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"You updated")
+            return redirect(login_users)
+        return render(request, 'updateUser.html',{'form':form})
+    else:
+        messages.success(request,"You must be logged in to update")
+        return redirect(login_users)
+    
+    
+
+def adminDashboard(request):
+    if not request.user.is_superuser:
+        return render(request,'403Forbidden.html')
+    return render(request,'adminHome.html')
+
+def userDashboard(request):
+    if request.user.is_authenticated:
+        if request.user.is_superuser:
+            return render(request,'403Forbidden.html')
+        else:
+            return render(request,'userHome.html')
+    return redirect(login_users)
+
+def invalidCredentials(request):
+    return render(request,'invalidCredentials.html')
 
 def signup(request):
     return render(request,'signup.html')
+
+def editDelete(request):
+    if not request.user.is_superuser:
+        return render(request,'403Forbidden.html')
+    if request.method == "GET":
+        searchKey=request.GET['searchBox']
+        searchList=movies.objects.filter(title__icontains=searchKey)
+        print(searchKey)
+        print(searchList)
+        return render(request,'editDeleteList.html',{'ms':searchList, 'key':searchKey})
+    else:
+        return render(request,'editDeleteList.html')
+
+def watchLaterHistory(request):
+    if not request.user.is_authenticated:
+        return redirect(login_users)
+    if request.user.is_superuser:
+        return render(request,'403Forbidden.html')
+    currentUser=request.user
+    wlList=watchLater.objects.filter(userId=currentUser)
+    return render(request,'watchLater.html',{'ms':wlList})
+
+def deleteWatchLater(request,idx):
+    if not request.user.is_authenticated:
+        return redirect(login_users)
+    if request.user.is_superuser:
+        return render(request,'403Forbidden.html')
+    wlList=watchLater.objects.get(id=idx)
+    wlList.delete()
+    return redirect(userDashboard)
+
+def watchLaterAdd(request,id):
+    if not request.user.is_authenticated:
+        return redirect(login_users)
+    if request.user.is_superuser:
+        return render(request,'403Forbidden.html')
+    try:
+        wl=watchLater()
+        wl.userId=request.user
+        wl.movieNum=movies.objects.get(movieId=id)
+        wl.save()
+        return redirect(userDashboard)
+    except:
+        print('something went wrong')
+        return redirect(indexPage)
 
 def searchResult(request):
     searchKey=request.GET['searchBox']
     searchList=movies.objects.filter(title__icontains=searchKey)
     return render(request,'searchResult.html',{'ms':searchList, 'key':searchKey})
+
+def deleteMovies(request,id):
+    if not request.user.is_authenticated:
+        return redirect(login_users)
+    if not request.user.is_superuser:
+        return render(request,'403Forbidden.html')
+    movieDel=movies.objects.get(movieId=id)
+    movieDel.delete()
+    return redirect(adminDashboard)
 
 def addMovies(request):
     return render(request, 'addMovie.html')

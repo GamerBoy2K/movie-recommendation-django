@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -10,3 +11,9 @@ class movies(models.Model):
     imagePoster = models.ImageField(upload_to='images',default='images/nonPoster.png')  
     class Meta:
         db_table="movies"
+
+class watchLater(models.Model):
+    userId=models.ForeignKey(User,on_delete=models.CASCADE)
+    movieNum=models.ForeignKey(movies,on_delete=models.CASCADE)
+    class Meta:
+        db_table="watchLater"
